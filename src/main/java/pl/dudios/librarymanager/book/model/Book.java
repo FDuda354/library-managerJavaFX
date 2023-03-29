@@ -1,11 +1,15 @@
 package pl.dudios.librarymanager.book.model;
 
+import pl.dudios.librarymanager.login.user.model.AppUser;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -23,6 +27,10 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private BookType type;
     private LocalDate publicationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
     public Book() {
     }

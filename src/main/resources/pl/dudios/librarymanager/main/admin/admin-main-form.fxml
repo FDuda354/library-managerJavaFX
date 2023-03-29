@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminMainController">
+<BorderPane prefHeight="800.0"  stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminMainController">
     <padding>
         <Insets bottom="0" left="0" right="0" top="0" />
     </padding>
@@ -12,17 +12,17 @@
         <fx:include source="admin-menubar.fxml" />
     </top>
     <center>
-        <StackPane fx:id="contentPane">
+        <StackPane>
             <TableView fx:id="contentTable" editable="true">
                 <columns>
-                    <TableColumn fx:id="idColumn" text="ID" />
+                    <TableColumn fx:id="idColumn" prefWidth="77.0" text="ID" />
                     <TableColumn fx:id="titleColumn" prefWidth="335.0" text="Tytuł" />
-                    <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="186.0" text="Autor" />
-                    <TableColumn fx:id="genreColumn" prefWidth="157.0" text="Gatunek" />
-                    <TableColumn fx:id="releaseDateColumn" prefWidth="170.0" text="Data wydania" />
-                    <TableColumn fx:id="stockColumn" prefWidth="96.0" text="Ilość na stanie" />
-                    <TableColumn fx:id="editColumn" prefWidth="67.0" text="Edycja" />
-                    <TableColumn fx:id="deleteColumn" prefWidth="107.0" text="Usuń" />
+                    <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="205.0" text="Autor" />
+                    <TableColumn fx:id="genreColumn" prefWidth="138.0" text="Gatunek" />
+                    <TableColumn fx:id="releaseDateColumn" prefWidth="174.0" text="Data wydania" />
+                    <TableColumn fx:id="stockColumn" prefWidth="92.0" text="Ilość na stanie" />
+                    <TableColumn fx:id="editColumn" prefWidth="84.0" text="Edycja" />
+                    <TableColumn fx:id="deleteColumn" prefWidth="90.0" text="Usuń" />
                 </columns>
             </TableView>
         </StackPane>

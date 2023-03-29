@@ -71,3 +71,9 @@
 .button:pressed {
     -fx-background-color: #0076a3;
 }
+
+.heading {
+    -fx-text-fill: #3a3f4b;
+}
+
+

@@ -1,12 +1,10 @@
 package pl.dudios.librarymanager.book.service;
 
 import pl.dudios.librarymanager.book.model.Book;
-import pl.dudios.librarymanager.book.model.BookType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
 import java.util.List;
 
 public class BookService {

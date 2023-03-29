@@ -1,0 +1,70 @@
+.root {
+    -fx-font-family: "Arial";
+}
+
+.book-panel {
+    -fx-background-color: #f7f7f7;
+    -fx-padding: 20px;
+    -fx-border-color: #286090;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.book-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #337ab7;
+}
+
+.book-text-field {
+    -fx-pref-width: 150px;
+}
+
+.label {
+    -fx-text-fill: #286090;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #337ab7;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-margin-top: 50px;
+}
+
+.button:hover {
+    -fx-background-color: #286090;
+}
+
+.choice-box {
+    -fx-pref-width: 150px;
+}
+
+.spinner {
+    -fx-pref-width: 150px;
+}
+
+.hbox {
+    -fx-alignment: CENTER;
+}
+
+.vbox {
+    -fx-alignment: CENTER;
+}
+
+.book-error {
+    -fx-text-fill: #FF0000;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.panel {
+    -fx-background-color: #f7f7f7;
+    -fx-padding: 20px;
+    -fx-border-color: #286090;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}

@@ -24,7 +24,7 @@ public class LoginService {
         AppUser user;
         try {
             user = query.getSingleResult();
-          if(!BCrypt.checkpw(password, user.getPassword()))
+            if (!BCrypt.checkpw(password, user.getPassword()))
                 throw new NoResultException();
 
         } catch (NoResultException e) {

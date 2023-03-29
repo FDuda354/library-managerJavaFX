@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminUserViewController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="800.0"  stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminUserViewController">
     <padding>
-        <Insets top="0" right="0" bottom="0" left="0"/>
+        <Insets bottom="0" left="0" right="0" top="0" />
     </padding>
     <top>
         <fx:include source="admin-menubar.fxml" />
     </top>
     <center>
-        <StackPane fx:id="contentPane">
+        <StackPane>
             <TableView fx:id="contentTable" editable="true">
                 <columns>
-                    <TableColumn fx:id="idColumn" text="ID"/>
-                    <TableColumn fx:id="loginIdColumn" prefWidth="335.0" text="Login ID"/>
-                    <TableColumn fx:id="firstNameColumn" prefWidth="335.0" text="Imię"/>
-                    <TableColumn fx:id="lastNameColumn" text="Nazwisko"/>
-                    <TableColumn fx:id="peselColumn" prefWidth="335.0" text="PESEL"/>
-                    <TableColumn fx:id="birthDateColumn" text="Data urodzenia"/>
-                    <TableColumn fx:id="joinDateColumn" text="Data dołączenia"/>
-                    <TableColumn fx:id="editColumn" text="Edycja"/>
-                    <TableColumn fx:id="deleteColumn" text="Usuń"/>
+                    <TableColumn fx:id="idColumn" prefWidth="77.0" text="ID" />
+                    <TableColumn fx:id="loginIdColumn" prefWidth="135.0" text="Login ID" />
+                    <TableColumn fx:id="firstNameColumn" prefWidth="137.0" text="Imię" />
+                    <TableColumn fx:id="lastNameColumn" prefWidth="164.0" text="Nazwisko" />
+                    <TableColumn fx:id="peselColumn" prefWidth="144.0" text="PESEL" />
+                    <TableColumn fx:id="birthDateColumn" prefWidth="142.0" text="Data urodzenia" />
+                    <TableColumn fx:id="joinDateColumn"  prefWidth="142.0" text="Data dołączenia" />
+                    <TableColumn fx:id="editColumn" prefWidth="89.0" text="Edycja" />
+                    <TableColumn fx:id="deleteColumn" prefWidth="89.0" text="Usuń" />
                 </columns>
             </TableView>
         </StackPane>

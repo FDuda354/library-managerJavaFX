@@ -1,7 +1,11 @@
 package pl.dudios.librarymanager.login.user.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pl.dudios.librarymanager.book.model.Book;
 import pl.dudios.librarymanager.book.model.OverdueFee;
+import pl.dudios.librarymanager.book.model.fx.BookFX;
+import pl.dudios.librarymanager.book.model.fx.OverdueFeeFX;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,9 +36,12 @@ public class AppUser {
     private LocalDate birthDate;
     private LocalDate joinDate;
 
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+//    @JoinTable(name = "overdue_fees",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "overdue_fee_id"))
     private List<OverdueFee> overdueFees;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Book> borrowedBooks;
 
     public AppUser() {
@@ -126,19 +133,42 @@ public class AppUser {
         this.joinDate = joinDate;
     }
 
-    public List<OverdueFee> getOverdueFees() {
-        return overdueFees;
+    public ObservableList<OverdueFeeFX> getOverdueFees() {
+        ObservableList<OverdueFeeFX> overdueFeesFXList = FXCollections.observableArrayList();
+
+        overdueFees.forEach(overdueFee -> overdueFeesFXList.add(new OverdueFeeFX(overdueFee)));
+
+        return overdueFeesFXList;
     }
 
     public void setOverdueFees(List<OverdueFee> overdueFees) {
         this.overdueFees = overdueFees;
     }
 
-    public List<Book> getBorrowedBooks() {
-        return borrowedBooks;
+    public ObservableList<BookFX> getBorrowedBooks() {
+        ObservableList<BookFX> borrowedBooksFXList = FXCollections.observableArrayList();
+
+        borrowedBooks.forEach(book -> borrowedBooksFXList.add(new BookFX(book)));
+
+        return borrowedBooksFXList;
     }
 
     public void setBorrowedBooks(List<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", loginId='" + loginId + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", role=" + role +
+                ", password='" + password + '\'' +
+                ", pesel='" + pesel + '\'' +
+                ", birthDate=" + birthDate +
+                ", joinDate=" + joinDate +
+                '}';
     }
 }

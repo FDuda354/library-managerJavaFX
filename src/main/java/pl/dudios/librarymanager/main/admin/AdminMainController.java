@@ -8,7 +8,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import pl.dudios.librarymanager.book.model.Book;
-import pl.dudios.librarymanager.book.model.BookType;
 import pl.dudios.librarymanager.book.model.fx.BookFX;
 import pl.dudios.librarymanager.book.service.BookService;
 
@@ -23,7 +22,7 @@ public class AdminMainController {
     public TableColumn<BookFX, Number> idColumn;
     public TableColumn<BookFX, String> titleColumn;
     public TableColumn<BookFX, String> authorColumn;
-    public TableColumn<BookFX, BookType> genreColumn;
+    public TableColumn<BookFX, String> genreColumn;
     public TableColumn<BookFX, LocalDate> releaseDateColumn;
     public TableColumn<BookFX, Number> stockColumn;
     public TableColumn<BookFX, Void> editColumn;
@@ -88,6 +87,7 @@ public class AdminMainController {
     }
 
     private void loadData() {
+        books.clear();
         List<Book> bookList = bookService.getAllBooks();
         books.setAll(bookList.stream().map(BookFX::new).collect(Collectors.toList()));
         contentTable.setItems(books);

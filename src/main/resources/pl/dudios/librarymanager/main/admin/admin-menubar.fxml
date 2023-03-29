@@ -5,14 +5,14 @@
 
         <Menu text="Użytkownicy">
             <items>
-                <MenuItem onAction="#addUser" text="Dodaj użytkownika" style="-fx-text-fill: black;"  />
-                <MenuItem onAction="#showUsers" text="Lista użytkowników" style="-fx-text-fill: black;"  />
+                <MenuItem onAction="#getAddUserPage" text="Dodaj użytkownika" style="-fx-text-fill: black;"  />
+                <MenuItem onAction="#getUserPage" text="Lista użytkowników" style="-fx-text-fill: black;"  />
             </items>
         </Menu>
         <Menu text="Książki" >
             <items>
-                <MenuItem onAction="#addBook" text="Dodaj książkę" style="-fx-text-fill: black;"  />
-                <MenuItem onAction="#showBooks" text="Lista książek" style="-fx-text-fill: black;" />
+                <MenuItem onAction="#getAddBookPage" text="Dodaj książkę" style="-fx-text-fill: black;"  />
+                <MenuItem onAction="#getBookPage" text="Lista książek" style="-fx-text-fill: black;" />
             </items>
         </Menu>
         <Menu text="Akcje">

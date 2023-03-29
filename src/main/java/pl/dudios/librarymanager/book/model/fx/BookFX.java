@@ -73,8 +73,8 @@ public class BookFX {
         return type.get();
     }
 
-    public ObjectProperty<BookType> typeProperty() {
-        return type;
+    public ObjectProperty<String> typeProperty() {
+        return new SimpleObjectProperty<>(type.getValue().getValue());
     }
 
     public void setType(BookType type) {

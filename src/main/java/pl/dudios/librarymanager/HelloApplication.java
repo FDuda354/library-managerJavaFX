@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.mindrot.jbcrypt.BCrypt;
-import pl.dudios.librarymanager.db.DataBase;
 
 import java.io.IOException;
 

@@ -51,7 +51,7 @@ public class LoginController {
 
         String page = user.getRole().equals(Role.ADMIN) ? "admin/admin-main-form.fxml" : "user/user-main-form.fxml";
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/"+page));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/" + page));
 
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);

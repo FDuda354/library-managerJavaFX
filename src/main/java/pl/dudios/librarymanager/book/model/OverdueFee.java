@@ -20,7 +20,9 @@ public class OverdueFee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private Integer daysOverdue; //dni spóźnienia
+
 
     private Integer fee; //kara
 
