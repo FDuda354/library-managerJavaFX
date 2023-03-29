@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<MenuBar stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminMenuController" fx:id="contentPane">
+
+        <Menu text="Użytkownicy">
+            <items>
+                <MenuItem onAction="#addUser" text="Dodaj użytkownika" style="-fx-text-fill: black;"  />
+                <MenuItem onAction="#showUsers" text="Lista użytkowników" style="-fx-text-fill: black;"  />
+            </items>
+        </Menu>
+        <Menu text="Książki" >
+            <items>
+                <MenuItem onAction="#addBook" text="Dodaj książkę" style="-fx-text-fill: black;"  />
+                <MenuItem onAction="#showBooks" text="Lista książek" style="-fx-text-fill: black;" />
+            </items>
+        </Menu>
+        <Menu text="Akcje">
+            <items>
+                <MenuItem onAction="#logout" text="Wyloguj" style="-fx-text-fill: black;"  />
+            </items>
+        </Menu>
+
+</MenuBar>

@@ -1,0 +1,73 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-base: #d0d0d0;
+    -fx-accent: #0076a3;
+}
+
+.menu-bar {
+    -fx-background-color: #0076a3;
+}
+
+.menu .label {
+    -fx-text-fill: #ffffff;
+}
+
+.menu {
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #0076a3;
+}
+
+.menu-item:hover {
+    -fx-background-color: #d0d0d0;
+    -fx-text-fill: #0076a3;
+}
+
+.menu-item:focused {
+    -fx-background-color: #0076a3;
+    -fx-text-fill: #d0d0d0;
+}
+
+.stack-pane {
+    -fx-background-color: #d0d0d0;
+}
+
+.table-view {
+    -fx-border-color: #0076a3;
+    -fx-border-width: 1px;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #3a3f4b;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #d0d0d0;
+}
+
+
+.table-cell {
+    -fx-text-fill: #3a3f4b;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #3a3f4b;
+}
+
+.button {
+    -fx-alignment: center;
+    -fx-background-color: #0076a3;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #a8a8a8;
+}
+
+.button:pressed {
+    -fx-background-color: #0076a3;
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@admin-main-form.css" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminUserViewController">
+    <padding>
+        <Insets top="0" right="0" bottom="0" left="0"/>
+    </padding>
+    <top>
+        <fx:include source="admin-menubar.fxml" />
+    </top>
+    <center>
+        <StackPane fx:id="contentPane">
+            <TableView fx:id="contentTable" editable="true">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID"/>
+                    <TableColumn fx:id="loginIdColumn" prefWidth="335.0" text="Login ID"/>
+                    <TableColumn fx:id="firstNameColumn" prefWidth="335.0" text="Imię"/>
+                    <TableColumn fx:id="lastNameColumn" text="Nazwisko"/>
+                    <TableColumn fx:id="peselColumn" prefWidth="335.0" text="PESEL"/>
+                    <TableColumn fx:id="birthDateColumn" text="Data urodzenia"/>
+                    <TableColumn fx:id="joinDateColumn" text="Data dołączenia"/>
+                    <TableColumn fx:id="editColumn" text="Edycja"/>
+                    <TableColumn fx:id="deleteColumn" text="Usuń"/>
+                </columns>
+            </TableView>
+        </StackPane>
+    </center>
+</BorderPane>
