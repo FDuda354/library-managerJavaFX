@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import pl.dudios.librarymanager.book.model.OverdueFee;
+import pl.dudios.librarymanager.book.rentals.model.fx.RentalFX;
 import pl.dudios.librarymanager.login.user.model.fx.AppUserFX;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class OverdueFeeFX {
     private final Long id;
     private final IntegerProperty daysOverdue = new SimpleIntegerProperty();
     private final IntegerProperty fee = new SimpleIntegerProperty();
-    private final ObjectProperty<BookFX> book = new SimpleObjectProperty<>();
+    private final ObjectProperty<RentalFX> rental = new SimpleObjectProperty<>();
     private final ObjectProperty<AppUserFX> user = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDateTime> dueDate = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDateTime> returnDate = new SimpleObjectProperty<>();
@@ -22,8 +23,8 @@ public class OverdueFeeFX {
     public OverdueFeeFX(OverdueFee overdueFee) {
         this.id = overdueFee.getId();
         setDaysOverdue(overdueFee.getDaysOverdue());
-        setFee(overdueFee.getFee());
-        setBook(new BookFX(overdueFee.getBook()));
+        setFee(overdueFee.getFee().intValue());
+        setRental(new RentalFX(overdueFee.getRental()));
         setUser(new AppUserFX(overdueFee.getUser()));
         setDueDate(overdueFee.getDueDate());
         setReturnDate(overdueFee.getReturnDate());
@@ -57,17 +58,6 @@ public class OverdueFeeFX {
         this.fee.set(fee);
     }
 
-    public BookFX getBook() {
-        return book.get();
-    }
-
-    public ObjectProperty<BookFX> bookProperty() {
-        return book;
-    }
-
-    public void setBook(BookFX book) {
-        this.book.set(book);
-    }
 
     public AppUserFX getUser() {
         return user.get();
@@ -103,5 +93,17 @@ public class OverdueFeeFX {
 
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate.set(returnDate);
+    }
+
+    public RentalFX getRental() {
+        return rental.get();
+    }
+
+    public ObjectProperty<RentalFX> rentalProperty() {
+        return rental;
+    }
+
+    public void setRental(RentalFX rental) {
+        this.rental.set(rental);
     }
 }

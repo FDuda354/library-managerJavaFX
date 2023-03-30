@@ -77,3 +77,9 @@
 }
 
 
+.book-title2 {
+    -fx-text-fill: #3a3f4b;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+
+}

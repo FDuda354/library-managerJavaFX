@@ -12,6 +12,8 @@ import javax.persistence.TypedQuery;
 
 public class LoginService {
 
+    private static AppUser userLogged;
+
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
 
     public AppUser validateLogin(String loginId, String password) {
@@ -37,4 +39,11 @@ public class LoginService {
         return user;
     }
 
+    public static AppUser getUserLogged() {
+        return userLogged;
+    }
+
+    public static void setUserLogged(AppUser userLogged) {
+        LoginService.userLogged = userLogged;
+    }
 }

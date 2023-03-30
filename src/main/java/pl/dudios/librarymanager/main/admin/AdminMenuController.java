@@ -16,7 +16,6 @@ public class AdminMenuController {
         changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/login/login-form.fxml")));
     }
 
-
     public void getAddUserPage(ActionEvent actionEvent) throws IOException {
         changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-add-user-form.fxml")));
     }
@@ -33,6 +32,14 @@ public class AdminMenuController {
         changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-main-form.fxml")));
     }
 
+    public void getUserBookPage(ActionEvent actionEvent) throws IOException {
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/user/user-main-form.fxml")));
+    }
+
+    public void getUserBorrowBookPage(ActionEvent actionEvent) throws IOException {
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/user/user-books-view.fxml")));
+    }
+
     private void changeScene(FXMLLoader fxmlLoader) throws IOException {
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         Stage stage = (Stage) contentPane.getScene().getWindow();
@@ -40,4 +47,6 @@ public class AdminMenuController {
         stage.setScene(scene);
         stage.show();
     }
+
+
 }

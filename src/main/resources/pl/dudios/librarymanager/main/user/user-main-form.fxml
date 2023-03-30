@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
-<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17"
+<?import javafx.scene.layout.StackPane?>
+<BorderPane stylesheets="@../common/main-form.css" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.user.UserMainController">
     <top>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1200.0">
-            <children>
-                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefHeight="50.0"
-                        prefWidth="100.0" text="Wyloguj"/>
-            </children>
-        </HBox>
+        <fx:include source="user-menubar.fxml" />
     </top>
     <center>
-        <VBox alignment="CENTER" spacing="20.0">
-            <children>
-                <Button fx:id="booksButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0"
-                        text="Książki"/>
-                <Button fx:id="readersButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0"
-                        text="Czytelnicy"/>
-            </children>
-        </VBox>
+        <StackPane>
+            <TableView fx:id="contentTable" editable="true">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="77.0" text="ID" />
+                    <TableColumn fx:id="titleColumn" prefWidth="335.0" text="Tytuł" />
+                    <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="205.0" text="Autor" />
+                    <TableColumn fx:id="genreColumn" prefWidth="138.0" text="Gatunek" />
+                    <TableColumn fx:id="releaseDateColumn" prefWidth="174.0" text="Data wydania" />
+                    <TableColumn fx:id="stockColumn" prefWidth="92.0" text="Ilość na stanie" />
+                    <TableColumn fx:id="borrowColumn" prefWidth="84.0" text="Wypożycz" />
+                </columns>
+            </TableView>
+        </StackPane>
     </center>
 </BorderPane>

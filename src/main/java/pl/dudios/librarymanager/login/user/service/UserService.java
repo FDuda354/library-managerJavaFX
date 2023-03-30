@@ -26,7 +26,7 @@ public class UserService {
 
         List<AppUser> allUsers = em.createQuery("SELECT u FROM AppUser u", AppUser.class).getResultList();
         allUsers.forEach(e -> {
-            Hibernate.initialize(e.getBorrowedBooks());
+            Hibernate.initialize(e.getRentals());
             Hibernate.initialize(e.getOverdueFees());
         });
 
@@ -94,7 +94,7 @@ public class UserService {
                             .setParameter("loginId", user.getLoginId())
                             .getSingleResult();
 
-                    if(Objects.equals(singleResult.getId(), user.getId()))
+                    if (Objects.equals(singleResult.getId(), user.getId()))
                         throw new NoResultException();
 
                     errorAlert("Użytkownik o podanym loginie: " + user.getLoginId() + " już istnieje");

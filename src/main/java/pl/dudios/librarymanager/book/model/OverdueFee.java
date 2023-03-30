@@ -1,5 +1,6 @@
 package pl.dudios.librarymanager.book.model;
 
+import pl.dudios.librarymanager.book.rentals.model.Rental;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -24,11 +26,11 @@ public class OverdueFee {
     private Integer daysOverdue; //dni spóźnienia
 
 
-    private Integer fee; //kara
+    private BigDecimal fee; //kara
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
+    @JoinColumn(name = "rental_id")
+    private Rental rental;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,16 +41,6 @@ public class OverdueFee {
     private LocalDateTime returnDate;
 
     public OverdueFee() {
-    }
-
-    public OverdueFee(Long id, Integer daysOverdue, Integer fee, Book book, AppUser user, LocalDateTime dueDate, LocalDateTime returnDate) {
-        this.id = id;
-        this.daysOverdue = daysOverdue;
-        this.fee = fee;
-        this.book = book;
-        this.user = user;
-        this.dueDate = dueDate;
-        this.returnDate = returnDate;
     }
 
     public Long getId() {
@@ -65,22 +57,6 @@ public class OverdueFee {
 
     public void setDaysOverdue(Integer daysOverdue) {
         this.daysOverdue = daysOverdue;
-    }
-
-    public Integer getFee() {
-        return fee;
-    }
-
-    public void setFee(Integer fee) {
-        this.fee = fee;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     public AppUser getUser() {
@@ -105,5 +81,21 @@ public class OverdueFee {
 
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
+    }
+
+    public Rental getRental() {
+        return rental;
+    }
+
+    public void setRental(Rental rental) {
+        this.rental = rental;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
     }
 }

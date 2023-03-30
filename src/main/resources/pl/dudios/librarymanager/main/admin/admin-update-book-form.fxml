@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.bootstrapfx.scene.layout.Panel?>
-<BorderPane prefHeight="800.0" stylesheets="@admin-add-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<BorderPane prefHeight="800.0" stylesheets="@../common/admin-add-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="pl.dudios.librarymanager.main.admin.AdminUpdateBookController">
+            fx:controller="pl.dudios.librarymanager.main.admin.book.AdminUpdateBookController">
     <padding>
         <Insets bottom="0" left="0" right="0" top="0"/>
     </padding>
@@ -52,7 +52,7 @@
                         </HBox>
                         <HBox spacing="10">
                             <Label text="Ilość"/>
-                            <Spinner fx:id="quantitySpinner" min="1" max="100" initialValue="1"
+                            <Spinner fx:id="quantitySpinner" min="0" max="100" initialValue="1"
                                      styleClass="book-text-field">
                                 <editable>true</editable>
                             </Spinner>

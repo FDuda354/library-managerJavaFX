@@ -1,4 +1,4 @@
-package pl.dudios.librarymanager.main.admin;
+package pl.dudios.librarymanager.main.admin.book;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

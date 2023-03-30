@@ -38,7 +38,6 @@ public class AppUserFX {
         setBirthDate(user.getBirthDate());
         setJoinDate(user.getJoinDate());
         setOverdueFees(user.getOverdueFees());
-        setBorrowedBooks(user.getBorrowedBooks());
     }
 
     public Long getId() {

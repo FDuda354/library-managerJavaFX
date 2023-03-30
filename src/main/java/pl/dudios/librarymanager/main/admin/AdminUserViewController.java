@@ -2,7 +2,6 @@ package pl.dudios.librarymanager.main.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -69,8 +68,8 @@ public class AdminUserViewController {
                         controller.setUser(getTableView().getItems().get(getIndex()));
                         Stage stage = (Stage) contentTable.getScene().getWindow();
 
-                            stage.setScene(scene);
-                            stage.show();
+                        stage.setScene(scene);
+                        stage.show();
                     });
                     setGraphic(editButton);
                 }
