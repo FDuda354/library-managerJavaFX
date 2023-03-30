@@ -1,13 +1,17 @@
 package pl.dudios.librarymanager.login.user.service;
 
-import javafx.scene.control.Alert;
 import org.hibernate.Hibernate;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
 import java.util.List;
+
+import static pl.dudios.librarymanager.common.AppAlert.errorAlert;
+import static pl.dudios.librarymanager.common.AppAlert.successAlert;
 
 
 public class UserService {
@@ -30,7 +34,6 @@ public class UserService {
         return allUsers;
     }
 
-
     public void deleteUserById(Long id) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -40,33 +43,62 @@ public class UserService {
 
         em.getTransaction().commit();
         em.close();
+
+        successAlert("Usunięto użytkownika");
     }
 
-    public static void peselAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Błąd");
-        alert.setHeaderText(null);
-        alert.setContentText("Niepoprawny numer PESEL");
-        alert.showAndWait();
+    public boolean saveUser(AppUser user) {
+        if (!validateNewUser(user)) {
+            return false;
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        user.setJoinDate(LocalDate.now());
+        em.persist(user);
+
+        em.getTransaction().commit();
+        em.close();
+
+        successAlert("Dodano użytkownika");
+        return true;
     }
 
-    public static void userAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Błąd");
-        alert.setHeaderText("dsadsadasdasdasdasd");
-        alert.setContentText("Niepoprawne dane");
-        alert.showAndWait();
+    private boolean validateNewUser(AppUser user) {
+        try {
+            if (!user.getLoginId().isEmpty() && !user.getName().isEmpty() && !user.getSurname().isEmpty() && !user.getPassword().isEmpty() && !user.getPesel().isEmpty() && user.getBirthDate() != null) {
+                EntityManager em = entityManagerFactory.createEntityManager();
+                em.getTransaction().begin();
+
+                try {
+                    em.createQuery("SELECT u FROM AppUser u WHERE u.loginId = :loginId", AppUser.class)
+                            .setParameter("loginId", user.getLoginId())
+                            .getSingleResult();
+                    errorAlert("Użytkownik o podanym loginie: " + user.getLoginId() + " już istnieje");
+                    return false;
+
+                } catch (NoResultException e) {
+                    if (!validatePesel(user.getPesel())) {
+                        errorAlert("Niepoprawny numer PESEL");
+                        return false;
+                    }
+                    return true;
+                } catch (Exception e) {
+                    errorAlert("Coś poszło nie tak!");
+                    return false;
+                }
+
+            }
+            errorAlert("Wypełnij wszystkie pola poprawnie");
+            return false;
+        } catch (Exception e) {
+            errorAlert("Coś poszło nie tak!");
+            return false;
+        }
     }
 
-    public static void alertUserSucces() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Dodano Użytkownika");
-        alert.setHeaderText(null);
-        alert.setContentText("Użytkownik został dodany do bazy");
-        alert.showAndWait();
-    }
 
-    public static boolean validatePesel(String pesel) {
+    private boolean validatePesel(String pesel) {
         if (pesel == null || pesel.length() != 11) {
             return false;
         }
@@ -81,9 +113,5 @@ public class UserService {
             sum += digit * weights[i];
         }
         return sum % 10 == 0;
-    }
-
-    public static boolean validateUser(AppUser user) {
-        return !user.getLoginId().isEmpty() && !user.getName().isEmpty() && !user.getSurname().isEmpty() && !user.getPassword().isEmpty() && !user.getPesel().isEmpty() && user.getBirthDate() != null;
     }
 }

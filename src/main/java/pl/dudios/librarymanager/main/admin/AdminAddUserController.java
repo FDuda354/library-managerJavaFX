@@ -4,21 +4,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.mindrot.jbcrypt.BCrypt;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 import pl.dudios.librarymanager.login.user.model.Role;
+import pl.dudios.librarymanager.login.user.service.UserService;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static pl.dudios.librarymanager.login.user.service.UserService.alertUserSucces;
-import static pl.dudios.librarymanager.login.user.service.UserService.peselAlert;
-import static pl.dudios.librarymanager.login.user.service.UserService.userAlert;
-import static pl.dudios.librarymanager.login.user.service.UserService.validatePesel;
-import static pl.dudios.librarymanager.login.user.service.UserService.validateUser;
+
 
 public class AdminAddUserController {
+
+    UserService userService;
     public TextField loginIdField;
     public TextField nameField;
     public TextField surnameField;
@@ -26,10 +26,11 @@ public class AdminAddUserController {
     public TextField passwordField;
     public TextField peselField;
     public DatePicker birthDateField;
-    public Label loginErrorLabel;
+
 
     @FXML
     public void initialize() {
+        userService = new UserService();
         roleBox.getItems().addAll(Role.values());
     }
 
@@ -53,20 +54,8 @@ public class AdminAddUserController {
         user.setPesel(pesel);
         user.setBirthDate(birthDate);
 
-        if (!validateUser(user)) {
-            userAlert();
-            return;
-        }
-
-        if (!validatePesel(pesel)) {
-            peselAlert();
-            return;
-        }
-
-        // TODO: utworzyć nowy obiekt książki z wprowadzonymi danymi i dodać go do bazy danych
-
-        alertUserSucces();
-        clearFields();
+        if(userService.saveUser(user))
+            clearFields();
 
     }
 

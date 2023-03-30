@@ -71,9 +71,7 @@ public class AdminMainController {
                 } else {
                     deleteButton.setOnAction(event -> {
                         BookFX book = getTableView().getItems().get(getIndex());
-                        // Kod do usunięcia książki z bazy danych (jeśli jest przechowywana w bazie danych)
-
-                        // Usuwanie książki z listy i odświeżanie tabeli
+                        bookService.deleteBookById(book.getId());
                         books.remove(book);
                         contentTable.refresh();
                     });

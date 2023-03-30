@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+<?import javafx.scene.control.PasswordField?>
 <BorderPane prefHeight="800.0" stylesheets="@admin-add-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.dudios.librarymanager.main.admin.AdminAddUserController">
@@ -52,7 +53,7 @@
                         </HBox>
                         <HBox spacing="10">
                             <Label text="Hasło"/>
-                            <TextField fx:id="passwordField" styleClass="book-text-field"/>
+                            <PasswordField fx:id="passwordField" styleClass="book-text-field"/>
                         </HBox>
                         <HBox spacing="10">
                             <Label text="PESEL"/>
@@ -66,11 +67,6 @@
                             <children>
                                 <Button text="Dodaj" mnemonicParsing="false" onAction="#addUser"
                                         styleClass="button"/>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" spacing="5.0">
-                            <children>
-                                <Label fx:id="loginErrorLabel" styleClass="book-error" text=""/>
                             </children>
                         </HBox>
                     </children>
