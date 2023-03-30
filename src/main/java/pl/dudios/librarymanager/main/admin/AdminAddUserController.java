@@ -3,8 +3,6 @@ package pl.dudios.librarymanager.main.admin;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.mindrot.jbcrypt.BCrypt;
 import pl.dudios.librarymanager.login.user.model.AppUser;
@@ -13,7 +11,6 @@ import pl.dudios.librarymanager.login.user.service.UserService;
 
 import java.time.LocalDate;
 import java.util.Optional;
-
 
 
 public class AdminAddUserController {
@@ -54,7 +51,7 @@ public class AdminAddUserController {
         user.setPesel(pesel);
         user.setBirthDate(birthDate);
 
-        if(userService.saveUser(user))
+        if (userService.saveUser(user))
             clearFields();
 
     }

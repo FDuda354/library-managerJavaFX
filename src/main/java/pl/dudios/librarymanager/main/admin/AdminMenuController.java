@@ -13,46 +13,30 @@ public class AdminMenuController {
     public MenuBar contentPane;
 
     public void logout(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/login/login-form.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        Stage stage = (Stage) contentPane.getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/login/login-form.fxml")));
     }
 
 
     public void getAddUserPage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-add-user-form.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        Stage stage = (Stage) contentPane.getScene().getWindow();
-        stage.setScene(scene);
-
-        stage.show();
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-add-user-form.fxml")));
     }
 
     public void getUserPage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-user-view-form.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) contentPane.getScene().getWindow();
-        stage.setScene(scene);
-
-        stage.show();
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-user-view-form.fxml")));
     }
 
     public void getAddBookPage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-add-book-form.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        Stage stage = (Stage) contentPane.getScene().getWindow();
-        stage.setScene(scene);
-
-        stage.show();
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-add-book-form.fxml")));
     }
 
     public void getBookPage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-main-form.fxml"));
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/admin/admin-main-form.fxml")));
+    }
+
+    private void changeScene(FXMLLoader fxmlLoader) throws IOException {
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         Stage stage = (Stage) contentPane.getScene().getWindow();
+
         stage.setScene(scene);
         stage.show();
     }

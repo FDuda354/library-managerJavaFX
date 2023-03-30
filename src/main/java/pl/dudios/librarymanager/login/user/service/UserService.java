@@ -1,6 +1,7 @@
 package pl.dudios.librarymanager.login.user.service;
 
 import org.hibernate.Hibernate;
+import org.mindrot.jbcrypt.BCrypt;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import static pl.dudios.librarymanager.common.AppAlert.errorAlert;
 import static pl.dudios.librarymanager.common.AppAlert.successAlert;
@@ -64,6 +66,23 @@ public class UserService {
         return true;
     }
 
+    public void updateUser(AppUser user) {
+        if (!validateNewUser(user)) {
+            return;
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        user.setJoinDate(em.find(AppUser.class, user.getId()).getJoinDate());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        em.merge(user);
+
+        em.getTransaction().commit();
+        em.close();
+
+        successAlert("Zaktualizowano użytkownika");
+    }
+
     private boolean validateNewUser(AppUser user) {
         try {
             if (!user.getLoginId().isEmpty() && !user.getName().isEmpty() && !user.getSurname().isEmpty() && !user.getPassword().isEmpty() && !user.getPesel().isEmpty() && user.getBirthDate() != null) {
@@ -71,9 +90,13 @@ public class UserService {
                 em.getTransaction().begin();
 
                 try {
-                    em.createQuery("SELECT u FROM AppUser u WHERE u.loginId = :loginId", AppUser.class)
+                    AppUser singleResult = em.createQuery("SELECT u FROM AppUser u WHERE u.loginId = :loginId", AppUser.class)
                             .setParameter("loginId", user.getLoginId())
                             .getSingleResult();
+
+                    if(Objects.equals(singleResult.getId(), user.getId()))
+                        throw new NoResultException();
+
                     errorAlert("Użytkownik o podanym loginie: " + user.getLoginId() + " już istnieje");
                     return false;
 

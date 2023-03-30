@@ -183,13 +183,6 @@ public class DataBase {
         book20.setPublicationDate(LocalDate.of(2005, 6, 1));
         em.persist(book20);
 
-        Book book21 = new Book();
-        book21.setTitle("W pustyni i w puszczy");
-        book21.setAuthor("Henryk Sienkiewicz");
-        book21.setQuantity(10);
-        book21.setType(BookType.FICTION);
-        book21.setPublicationDate(LocalDate.of(1912, 1, 1));
-        em.persist(book21);
 
         Book book22 = new Book();
         book22.setTitle("Wiedźmin: Ostatnie życzenie");
@@ -295,13 +288,6 @@ public class DataBase {
         book34.setPublicationDate(LocalDate.of(1985, 1, 1));
         em.persist(book34);
 
-        Book book35 = new Book();
-        book35.setTitle("1984");
-        book35.setAuthor("George Orwell");
-        book35.setQuantity(5);
-        book35.setType(BookType.FANTASY);
-        book35.setPublicationDate(LocalDate.of(1949, 6, 8));
-        em.persist(book35);
 
         Book book36 = new Book();
         book36.setTitle("Który skrzywdził psa?");

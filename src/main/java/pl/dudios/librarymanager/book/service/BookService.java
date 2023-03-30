@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Objects;
 
 import static pl.dudios.librarymanager.common.AppAlert.errorAlert;
 import static pl.dudios.librarymanager.common.AppAlert.successAlert;
@@ -30,7 +31,7 @@ public class BookService {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        if (!validateNewBook(book))
+        if (!validateBook(book))
             return false;
 
         em.persist(book);
@@ -42,7 +43,34 @@ public class BookService {
         return true;
     }
 
-    private boolean validateNewBook(Book book) {
+    public void deleteBookById(Long id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        Book book = em.find(Book.class, id);
+        em.remove(book);
+
+        em.getTransaction().commit();
+        em.close();
+
+        successAlert("Książka została usunięta z biblioteki");
+    }
+
+    public void updateBook(Book book) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        if(!validateBook(book))
+            return;
+
+        em.merge(book);
+
+        em.getTransaction().commit();
+        em.close();
+
+        successAlert("Książka została zaktualizowana");
+    }
+    private boolean validateBook(Book book) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
@@ -53,10 +81,13 @@ public class BookService {
             return false;
         }
         try {
-            em.createQuery("SELECT b FROM Book b WHERE b.title = :title AND b.author = :author", Book.class)
+            Book singleResult = em.createQuery("SELECT b FROM Book b WHERE b.title = :title AND b.author = :author", Book.class)
                     .setParameter("title", book.getTitle())
                     .setParameter("author", book.getAuthor())
                     .getSingleResult();
+
+            if(Objects.equals(singleResult.getId(), book.getId()))
+                throw new NoResultException();
 
             errorAlert("Książka o podanym tytule i autorze już istnieje");
             em.getTransaction().commit();
@@ -72,16 +103,5 @@ public class BookService {
 
     }
 
-    public void deleteBookById(Long id) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
 
-        Book book = em.find(Book.class, id);
-        em.remove(book);
-
-        em.getTransaction().commit();
-        em.close();
-
-        successAlert("Książka została usunięta z biblioteki");
-    }
 }
