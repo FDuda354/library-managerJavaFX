@@ -373,10 +373,10 @@ public class DataBase {
         user1.setName("Jan");
         user1.setSurname("Kowalski");
         user1.setBirthDate(LocalDate.of(1990, 1, 1));
-        user1.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+        user1.setPassword(BCrypt.hashpw("admin", BCrypt.gensalt()));
         user1.setJoinDate(LocalDate.now());
-        user1.setRole(Role.USER);
-        user1.setLoginId("w1234");
+        user1.setRole(Role.ADMIN);
+        user1.setLoginId("admin");
         user1.setPesel("12345678901");
         em.persist(user1);
 
@@ -386,7 +386,7 @@ public class DataBase {
         user2.setBirthDate(LocalDate.of(1999, 1, 1));
         user2.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
         user2.setJoinDate(LocalDate.now());
-        user2.setRole(Role.ADMIN);
+        user2.setRole(Role.USER);
         user2.setLoginId("w60846");
         user2.setPesel("12345678901");
         em.persist(user2);

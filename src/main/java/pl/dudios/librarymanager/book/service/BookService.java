@@ -195,4 +195,16 @@ public class BookService {
         em.getTransaction().commit();
         em.close();
     }
+
+    public List<UserBookFX> getAllHistoryBooksByUserId() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        AppUser user = em.find(AppUser.class, LoginService.getUserLogged().getId());
+
+        return user.getRentals().stream()
+                .filter(rental -> rental.getReturnDate() != null)
+                .map(rental -> new UserBookFX(rental.getBook(), rental))
+                .collect(Collectors.toList());
+    }
 }

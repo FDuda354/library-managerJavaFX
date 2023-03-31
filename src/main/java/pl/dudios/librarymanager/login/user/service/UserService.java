@@ -27,7 +27,7 @@ public class UserService {
         List<AppUser> allUsers = em.createQuery("SELECT u FROM AppUser u", AppUser.class).getResultList();
         allUsers.forEach(e -> {
             Hibernate.initialize(e.getRentals());
-            Hibernate.initialize(e.getOverdueFees());
+
         });
 
         em.getTransaction().commit();

@@ -48,7 +48,7 @@ public class LoginController {
 //        }
 
         //AppUser user = loginService.validateLogin("w60846", "1234");
-        AppUser user = loginService.validateLogin("w1234", "1234");
+        AppUser user = loginService.validateLogin("admin", "admin");
 
         loginService.setUserLogged(user);
         String page = user.getRole().equals(Role.ADMIN) ? "admin/admin-main-form.fxml" : "user/user-main-form.fxml";

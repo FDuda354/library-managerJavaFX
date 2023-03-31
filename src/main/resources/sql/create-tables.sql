@@ -1,7 +1,3 @@
---users <-> rentals: Jeden użytkownik może mieć wiele wypożyczeń, ale każde wypożyczenie jest przypisane tylko do jednego użytkownika. W tabeli rentals, kolumna user_id jest kluczem obcym, który odnosi się do kolumny id w tabeli users.
---books <-> rentals: Jedna książka może być wypożyczona wiele razy, ale każde wypożyczenie jest przypisane tylko do jednej książki. W tabeli rentals, kolumna book_id jest kluczem obcym, który odnosi się do kolumny id w tabeli books.
---users <-> overdue_fees: Jeden użytkownik może mieć wiele opłat za przeterminowane książki, ale każda opłata za przeterminowanie jest przypisana tylko do jednego użytkownika. W tabeli overdue_fees, kolumna user_id jest kluczem obcym, który odnosi się do kolumny id w tabeli users.
---books <-> overdue_fees: Jedna książka może mieć wiele opłat za przeterminowanie, ale każda opłata za przeterminowanie jest przypisana tylko do jednej książki. W tabeli overdue_fees, kolumna book_id jest kluczem obcym, który odnosi się do kolumny id w tabeli books.
 create TABLE users
 (
     id         BIGSERIAL PRIMARY KEY,

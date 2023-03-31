@@ -39,7 +39,9 @@ public class AdminMenuController {
     public void getUserBorrowBookPage(ActionEvent actionEvent) throws IOException {
         changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/user/user-books-view.fxml")));
     }
-
+    public void getUserHistoryPage(ActionEvent actionEvent) throws IOException {
+        changeScene(new FXMLLoader(getClass().getResource("/pl/dudios/librarymanager/main/user/user-books-history-view.fxml")));
+    }
     private void changeScene(FXMLLoader fxmlLoader) throws IOException {
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         Stage stage = (Stage) contentPane.getScene().getWindow();
@@ -47,6 +49,7 @@ public class AdminMenuController {
         stage.setScene(scene);
         stage.show();
     }
+
 
 
 }

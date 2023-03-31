@@ -8,7 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pl.dudios.librarymanager.book.model.fx.BookFX;
-import pl.dudios.librarymanager.book.model.fx.OverdueFeeFX;
+import pl.dudios.librarymanager.book.rentals.model.Rental;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 import pl.dudios.librarymanager.login.user.model.Role;
 
@@ -24,8 +24,8 @@ public class AppUserFX {
     private final StringProperty pesel = new SimpleStringProperty();
     private final ObjectProperty<LocalDate> birthDate = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDate> joinDate = new SimpleObjectProperty<>();
-    private final ObservableList<OverdueFeeFX> overdueFees = FXCollections.observableArrayList();
-    private final ObservableList<BookFX> borrowedBooks = FXCollections.observableArrayList();
+    private final ObservableList<Rental> rentals = FXCollections.observableArrayList();
+
 
     public AppUserFX(AppUser user) {
         this.id = user.getId();
@@ -37,7 +37,7 @@ public class AppUserFX {
         setPesel(user.getPesel());
         setBirthDate(user.getBirthDate());
         setJoinDate(user.getJoinDate());
-        setOverdueFees(user.getOverdueFees());
+        user.setRentals(user.getRentals());
     }
 
     public Long getId() {
@@ -140,21 +140,21 @@ public class AppUserFX {
         this.joinDate.set(joinDate);
     }
 
-    public ObservableList<OverdueFeeFX> getOverdueFees() {
-        return overdueFees;
-    }
+//    public ObservableList<BookFX> getBorrowedBooks() {
+//        return borrowedBooks;
+//    }
+//TODO:to reamove
+//    public ObservableList<OverdueFeeFX> getOverdueFees() {
+//        return overdueFees;
+//    }
 
-    public ObservableList<BookFX> getBorrowedBooks() {
-        return borrowedBooks;
-    }
+//    public void setOverdueFees(ObservableList<OverdueFeeFX> overdueFees) {
+//        this.overdueFees.setAll(overdueFees);
+//    }
 
-    public void setOverdueFees(ObservableList<OverdueFeeFX> overdueFees) {
-        this.overdueFees.setAll(overdueFees);
-    }
-
-    public void setBorrowedBooks(ObservableList<BookFX> borrowedBooks) {
-        this.borrowedBooks.setAll(borrowedBooks);
-    }
+//    public void setBorrowedBooks(ObservableList<BookFX> borrowedBooks) {
+//        this.borrowedBooks.setAll(borrowedBooks);
+//    }
 
     public ObservableValue<String> firstNameProperty() {
         return name;

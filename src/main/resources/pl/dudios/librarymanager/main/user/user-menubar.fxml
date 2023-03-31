@@ -10,6 +10,9 @@
             <items>
                 <MenuItem onAction="#getUserBorrowBookPage" text="Twoje książki" style="-fx-text-fill: black;" />
             </items>
+            <items>
+                <MenuItem onAction="#getUserHistoryPage" text="Historia" style="-fx-text-fill: black;" />
+            </items>
         </Menu>
         <Menu text="Akcje">
             <items>
