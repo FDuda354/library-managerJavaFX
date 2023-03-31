@@ -13,6 +13,9 @@ public class HelloApplication extends Application {
 
         //DataBase.fillBookDataBase();
         //DataBase.fillUserDataBase();
+        //jpackage --input target --name library --main-jar library-manager-1.jar --main-class pl.dudios.librarymanager.HelloApplication --type dmg --icon bookicon.icns
+        //jpackage --input target --name library --main-jar library-manager-1.jar --main-class pl.dudios.librarymanager.HelloApplication --type exe --icon bookicon.ico
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login/login-form.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
