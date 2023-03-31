@@ -104,6 +104,7 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
+                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>pl.dudios.librarymanager.HelloApplication</mainClass>
@@ -113,10 +114,23 @@
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <modules>
+                                <module>org.openjfx:javafx-controls</module>
+                                <module>org.openjfx:javafx-fxml</module>
+                                <module>org.controlsfx:controlsfx</module>
+                                <module>net.synedra:validatorfx</module>
+                                <module>org.kordamp.ikonli:ikonli-javafx</module>
+                                <module>org.kordamp.bootstrapfx:bootstrapfx-core</module>
+                                <module>org.hibernate:hibernate-core</module>
+                                <module>org.postgresql:postgresql</module>
+                                <module>org.projectlombok:lombok</module>
+                            </modules>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>
+<!--komenda pakująca do dmg bedzie taka:-->
