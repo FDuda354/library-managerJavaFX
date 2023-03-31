@@ -3,8 +3,6 @@ package pl.dudios.librarymanager.main.user;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import pl.dudios.librarymanager.book.model.fx.UserBookFX;
@@ -13,7 +11,7 @@ import pl.dudios.librarymanager.book.service.BookService;
 import java.time.LocalDate;
 
 public class UserBookHistoryontroller {
-    public TableColumn <UserBookFX, LocalDate>returnDateColumn;
+    public TableColumn<UserBookFX, LocalDate> returnDateColumn;
     private BookService bookService;
     public TableView<UserBookFX> booksTable;
     public TableColumn<UserBookFX, Number> quantityColumn;

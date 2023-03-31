@@ -9,7 +9,7 @@ import pl.dudios.librarymanager.book.model.fx.BookFX;
 import pl.dudios.librarymanager.book.service.BookService;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 import static pl.dudios.librarymanager.common.AppAlert.successAlert;
 
@@ -37,7 +37,7 @@ public class BorrowBookController {
     public void borrowBook(ActionEvent actionEvent) {
         LocalDate dueDate = returnDateField.getValue();
         Integer quantity = (Integer) quantitySpinner.getValue();
-        int days = Period.between(LocalDate.now(), dueDate).getDays();
+        long days = ChronoUnit.DAYS.between(LocalDate.now(), dueDate);
         if (bookService.borrowBook(bookId, quantity, dueDate))
             successAlert("Wypożyczono książkę " + TitleField.getText() + " na " + days + " dni");
     }

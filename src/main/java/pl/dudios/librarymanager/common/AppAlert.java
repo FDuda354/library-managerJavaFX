@@ -17,7 +17,7 @@ public class AppAlert {
 
     public static void successAlert(String msg) {
         javafx.scene.control.Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Dodano!");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();

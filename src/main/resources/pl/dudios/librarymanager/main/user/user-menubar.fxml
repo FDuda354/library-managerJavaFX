@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<MenuBar stylesheets="@../common/main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminMenuController" fx:id="contentPane">
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<MenuBar stylesheets="@../common/main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.AdminMenuController"
+         fx:id="contentPane">
 
-        <Menu text="Książki" >
-            <items>
-                <MenuItem onAction="#getUserBookPage" text="Lista książek" style="-fx-text-fill: black;" />
-            </items>
-            <items>
-                <MenuItem onAction="#getUserBorrowBookPage" text="Twoje książki" style="-fx-text-fill: black;" />
-            </items>
-            <items>
-                <MenuItem onAction="#getUserHistoryPage" text="Historia" style="-fx-text-fill: black;" />
-            </items>
-        </Menu>
-        <Menu text="Akcje">
-            <items>
-                <MenuItem onAction="#logout" text="Wyloguj" style="-fx-text-fill: black;"  />
-            </items>
-        </Menu>
+    <Menu text="Książki">
+        <items>
+            <MenuItem onAction="#getUserBookPage" text="Lista książek" style="-fx-text-fill: black;"/>
+        </items>
+        <items>
+            <MenuItem onAction="#getUserBorrowBookPage" text="Twoje książki" style="-fx-text-fill: black;"/>
+        </items>
+        <items>
+            <MenuItem onAction="#getUserHistoryPage" text="Historia" style="-fx-text-fill: black;"/>
+        </items>
+    </Menu>
+    <Menu text="Akcje">
+        <items>
+            <MenuItem onAction="#logout" text="Wyloguj" style="-fx-text-fill: black;"/>
+        </items>
+    </Menu>
 
 </MenuBar>

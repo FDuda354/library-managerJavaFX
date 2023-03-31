@@ -29,15 +29,3 @@ create TABLE rentals
     quantity         INTEGER      NOT NULL,
     returnDate DATE
 );
-create TABLE overdue_fees
-(
-    id           BIGSERIAL PRIMARY KEY,
-    daysOverdue INTEGER   NOT NULL,
-    fee          numeric(15,2)   NOT NULL,
-    rental_id      BIGINT REFERENCES rentals (id),
-    user_id      BIGINT REFERENCES users (id),
-    dueDate     TIMESTAMP NOT NULL,
-    returnDate  TIMESTAMP NOT NULL
-);
-
-

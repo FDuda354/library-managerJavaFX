@@ -40,15 +40,12 @@ public class LoginController {
 
     public void login(ActionEvent actionEvent) throws IOException {
 
-//        AppUser user = loginService.validateLogin(usernameField.getText(), passwordField.getText());
-//
-//        if (user == null) {
-//            loginErrorLabel.setText("Niepoprawny login lub hasło!");
-//            return;
-//        }
+        AppUser user = loginService.validateLogin(usernameField.getText(), passwordField.getText());
 
-        //AppUser user = loginService.validateLogin("w60846", "1234");
-        AppUser user = loginService.validateLogin("admin", "admin");
+        if (user == null) {
+            loginErrorLabel.setText("Niepoprawny login lub hasło!");
+            return;
+        }
 
         loginService.setUserLogged(user);
         String page = user.getRole().equals(Role.ADMIN) ? "admin/admin-main-form.fxml" : "user/user-main-form.fxml";

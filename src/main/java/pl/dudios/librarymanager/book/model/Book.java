@@ -24,20 +24,7 @@ public class Book {
     private BookType type;
     private LocalDate publicationDate;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private AppUser user;
-
     public Book() {
-    }
-
-    public Book(Long id, String title, String author, Integer quantity, BookType type, LocalDate publicationDate) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.quantity = quantity;
-        this.type = type;
-        this.publicationDate = publicationDate;
     }
 
     public Long getId() {

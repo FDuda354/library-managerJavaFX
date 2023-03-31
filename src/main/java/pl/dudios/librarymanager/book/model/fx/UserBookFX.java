@@ -11,6 +11,7 @@ import pl.dudios.librarymanager.book.model.Book;
 import pl.dudios.librarymanager.book.rentals.model.Rental;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class UserBookFX {
 
@@ -19,10 +20,9 @@ public class UserBookFX {
     private final StringProperty title = new SimpleStringProperty();
     private final StringProperty author = new SimpleStringProperty();
     private final IntegerProperty quantity = new SimpleIntegerProperty();
-
-    private ObjectProperty<LocalDate> rentalDate = new SimpleObjectProperty<>(); //data wypożyczenia,
-    private ObjectProperty<LocalDate> dueDate = new SimpleObjectProperty<>(); //data, kiedy książka musi być zwrócona,
-    private ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty<>(); //data zwrócenia książki (może być NULL, jeśli książka nie została jeszcze zwrócona).
+    private ObjectProperty<LocalDate> rentalDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> dueDate = new SimpleObjectProperty<>(); //date, when book should be returned
+    private ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty<>(); //date, when book was returned (null if not returned)
 
     public UserBookFX(Book book, Rental rental) {
         this.id = book.getId();
@@ -117,7 +117,7 @@ public class UserBookFX {
     }
 
     public ObservableValue<Number> daysOverdueProperty() {
-        int days = Math.max(LocalDate.now().getDayOfYear() - dueDate.get().getDayOfYear(), 0);
+        long days = Math.max(ChronoUnit.DAYS.between(dueDate.get(), LocalDate.now()), 0);
         return new SimpleObjectProperty<>(days);
     }
 

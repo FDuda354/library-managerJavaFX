@@ -7,7 +7,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pl.dudios.librarymanager.book.model.fx.BookFX;
 import pl.dudios.librarymanager.book.rentals.model.Rental;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 import pl.dudios.librarymanager.login.user.model.Role;
@@ -140,22 +139,6 @@ public class AppUserFX {
         this.joinDate.set(joinDate);
     }
 
-//    public ObservableList<BookFX> getBorrowedBooks() {
-//        return borrowedBooks;
-//    }
-//TODO:to reamove
-//    public ObservableList<OverdueFeeFX> getOverdueFees() {
-//        return overdueFees;
-//    }
-
-//    public void setOverdueFees(ObservableList<OverdueFeeFX> overdueFees) {
-//        this.overdueFees.setAll(overdueFees);
-//    }
-
-//    public void setBorrowedBooks(ObservableList<BookFX> borrowedBooks) {
-//        this.borrowedBooks.setAll(borrowedBooks);
-//    }
-
     public ObservableValue<String> firstNameProperty() {
         return name;
     }
@@ -166,5 +149,9 @@ public class AppUserFX {
 
     public ObservableValue<String> lastNameProperty() {
         return surname;
+    }
+
+    public ObservableList<Rental> getRentals() {
+        return rentals;
     }
 }

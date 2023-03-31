@@ -25,10 +25,9 @@ public class Rental {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-    private LocalDate rentalDate; //data wypożyczenia,
-    private LocalDate dueDate; //data, kiedy książka musi być zwrócona,
-    private LocalDate returnDate; //data zwrócenia książki (może być NULL, jeśli książka nie została jeszcze zwrócona).
-
+    private LocalDate rentalDate;
+    private LocalDate dueDate; //date, when book should be returned
+    private LocalDate returnDate; //date, when book was returned (null if not returned)
     private Integer quantity;
 
     public Rental() {

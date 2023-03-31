@@ -20,7 +20,8 @@
 
                 <VBox alignment="CENTER" spacing="10.0">
                     <children>
-                        <ImageView fx:id="loginImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"
+                        <ImageView fx:id="loginImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
+                                   preserveRatio="true"
                                    styleClass="login-image"/>
                         <Label styleClass="login-title" text="Biblioteka"/>
                         <TextField fx:id="usernameField" promptText="Login" styleClass="login-text-field"/>

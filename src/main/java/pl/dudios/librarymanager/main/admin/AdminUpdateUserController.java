@@ -56,6 +56,5 @@ public class AdminUpdateUserController {
 
         userService.updateUser(user);
 
-
     }
 }

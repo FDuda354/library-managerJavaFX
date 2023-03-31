@@ -23,7 +23,6 @@ import static pl.dudios.librarymanager.common.AppAlert.successAlert;
 public class BookService {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
 
-
     public List<Book> getAllBooks() {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -48,7 +47,7 @@ public class BookService {
         em.getTransaction().commit();
         em.close();
 
-        successAlert("Książka została dodana do biblioteki");
+        successAlert("Książka" + book.getTitle() + " została dodana do biblioteki");
         return true;
     }
 
@@ -79,40 +78,6 @@ public class BookService {
 
         successAlert("Książka została zaktualizowana");
     }
-
-    private boolean validateBook(Book book) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-
-        if (book.getTitle().isEmpty() || book.getAuthor().isEmpty() || book.getType() == null || book.getQuantity() < 0 || book.getPublicationDate() == null) {
-            errorAlert("Wszystkie pola muszą być wypełnione poprawnie");
-            em.getTransaction().commit();
-            em.close();
-            return false;
-        }
-        try {
-            Book singleResult = em.createQuery("SELECT b FROM Book b WHERE b.title = :title AND b.author = :author", Book.class)
-                    .setParameter("title", book.getTitle())
-                    .setParameter("author", book.getAuthor())
-                    .getSingleResult();
-
-            if (Objects.equals(singleResult.getId(), book.getId()))
-                throw new NoResultException();
-
-            errorAlert("Książka o podanym tytule i autorze już istnieje");
-            em.getTransaction().commit();
-            em.close();
-            return false;
-        } catch (NoResultException e) {
-
-            em.getTransaction().commit();
-            em.close();
-            return true;
-        }
-
-
-    }
-
 
     public boolean borrowBook(Long bookId, Integer quantity, LocalDate dueDate) {
 
@@ -158,19 +123,6 @@ public class BookService {
         return true;
     }
 
-    public List<UserBookFX> getAllBooksByUserId() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-
-        AppUser user = em.find(AppUser.class, LoginService.getUserLogged().getId());
-
-        return user.getRentals().stream()
-                .filter(rental -> rental.getReturnDate() == null)
-                .map(rental -> new UserBookFX(rental.getBook(), rental))
-                .collect(Collectors.toList());
-
-    }
-
     public void returnBook(Long id) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -180,7 +132,8 @@ public class BookService {
         Rental rental = rentals.stream()
                 .filter(r -> r.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Nie znaleziono wypożyczenia"));
+                .orElseThrow(() -> new RuntimeException("Didn't find rental with id: " + id));
+
         rental.setReturnDate(LocalDate.now());
         rentals.remove(rental);
 
@@ -191,9 +144,25 @@ public class BookService {
         book.setQuantity(em.find(Book.class, book.getId()).getQuantity() + rental.getQuantity());
         em.merge(book);
 
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public List<UserBookFX> getAllBooksByUserId() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        AppUser user = em.find(AppUser.class, LoginService.getUserLogged().getId());
+
+        List<UserBookFX> userBookFXList = user.getRentals().stream()
+                .filter(rental -> rental.getReturnDate() == null)
+                .map(rental -> new UserBookFX(rental.getBook(), rental))
+                .collect(Collectors.toList());
 
         em.getTransaction().commit();
         em.close();
+        return userBookFXList;
+
     }
 
     public List<UserBookFX> getAllHistoryBooksByUserId() {
@@ -202,9 +171,44 @@ public class BookService {
 
         AppUser user = em.find(AppUser.class, LoginService.getUserLogged().getId());
 
-        return user.getRentals().stream()
+        List<UserBookFX> userBookFXList = user.getRentals().stream()
                 .filter(rental -> rental.getReturnDate() != null)
                 .map(rental -> new UserBookFX(rental.getBook(), rental))
                 .collect(Collectors.toList());
+
+        em.getTransaction().commit();
+        em.close();
+        return userBookFXList;
+    }
+
+    private boolean validateBook(Book book) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        if (book.getTitle().isEmpty() || book.getAuthor().isEmpty() || book.getType() == null || book.getQuantity() < 0 || book.getPublicationDate() == null) {
+            errorAlert("Wszystkie pola muszą być wypełnione poprawnie");
+            em.getTransaction().commit();
+            em.close();
+            return false;
+        }
+        try {
+            Book singleResult = em.createQuery("SELECT b FROM Book b WHERE b.title = :title AND b.author = :author", Book.class)
+                    .setParameter("title", book.getTitle())
+                    .setParameter("author", book.getAuthor())
+                    .getSingleResult();
+
+            if (Objects.equals(singleResult.getId(), book.getId()))
+                throw new NoResultException();
+
+            errorAlert("Książka o podanym tytule i autorze już istnieje");
+            em.getTransaction().commit();
+            em.close();
+            return false;
+        } catch (NoResultException e) {
+
+            em.getTransaction().commit();
+            em.close();
+            return true;
+        }
     }
 }

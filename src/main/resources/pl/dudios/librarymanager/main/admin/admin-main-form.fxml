@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<BorderPane prefHeight="800.0" stylesheets="@../common/main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.dudios.librarymanager.main.admin.book.AdminMainController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<BorderPane prefHeight="800.0" stylesheets="@../common/main-form.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.dudios.librarymanager.main.admin.book.AdminMainController">
     <padding>
-        <Insets bottom="0" left="0" right="0" top="0" />
+        <Insets bottom="0" left="0" right="0" top="0"/>
     </padding>
     <top>
-        <fx:include source="admin-menubar.fxml" />
+        <fx:include source="admin-menubar.fxml"/>
     </top>
     <center>
         <StackPane>
             <TableView fx:id="contentTable" editable="true">
                 <columns>
-                    <TableColumn fx:id="idColumn" prefWidth="77.0" text="ID" />
-                    <TableColumn fx:id="titleColumn" prefWidth="335.0" text="Tytuł" />
-                    <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="205.0" text="Autor" />
-                    <TableColumn fx:id="genreColumn" prefWidth="138.0" text="Gatunek" />
-                    <TableColumn fx:id="releaseDateColumn" prefWidth="174.0" text="Data wydania" />
-                    <TableColumn fx:id="stockColumn" prefWidth="92.0" text="Ilość na stanie" />
-                    <TableColumn fx:id="editColumn" prefWidth="84.0" text="Edycja" />
-                    <TableColumn fx:id="deleteColumn" prefWidth="90.0" text="Usuń" />
+                    <TableColumn fx:id="idColumn" prefWidth="77.0" text="ID"/>
+                    <TableColumn fx:id="titleColumn" prefWidth="335.0" text="Tytuł"/>
+                    <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="205.0" text="Autor"/>
+                    <TableColumn fx:id="genreColumn" prefWidth="138.0" text="Gatunek"/>
+                    <TableColumn fx:id="releaseDateColumn" prefWidth="174.0" text="Data wydania"/>
+                    <TableColumn fx:id="stockColumn" prefWidth="92.0" text="Ilość na stanie"/>
+                    <TableColumn fx:id="editColumn" prefWidth="84.0" text="Edycja"/>
+                    <TableColumn fx:id="deleteColumn" prefWidth="90.0" text="Usuń"/>
                 </columns>
             </TableView>
         </StackPane>

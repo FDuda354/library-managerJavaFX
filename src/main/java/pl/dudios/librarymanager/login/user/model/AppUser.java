@@ -1,7 +1,5 @@
 package pl.dudios.librarymanager.login.user.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import pl.dudios.librarymanager.book.rentals.model.Rental;
 
 import javax.persistence.CascadeType;
@@ -37,19 +35,6 @@ public class AppUser {
     private List<Rental> rentals;
 
     public AppUser() {
-    }
-
-    public AppUser(Long id, String loginId, String name, String surname, Role role, String password, String pesel, LocalDate birthDate, LocalDate joinDate,  List<Rental> rentals) {
-        this.id = id;
-        this.loginId = loginId;
-        this.name = name;
-        this.surname = surname;
-        this.role = role;
-        this.password = password;
-        this.pesel = pesel;
-        this.birthDate = birthDate;
-        this.joinDate = joinDate;
-        this.rentals = rentals;
     }
 
     public Long getId() {
@@ -123,19 +108,6 @@ public class AppUser {
     public void setJoinDate(LocalDate joinDate) {
         this.joinDate = joinDate;
     }
-//tODO: to delete
-//    public ObservableList<OverdueFeeFX> getOverdueFees() {
-//        ObservableList<OverdueFeeFX> overdueFeesFXList = FXCollections.observableArrayList();
-//
-//        overdueFees.forEach(overdueFee -> overdueFeesFXList.add(new OverdueFeeFX(overdueFee)));
-//
-//        return overdueFeesFXList;
-//    }
-//
-//    public void setOverdueFees(List<OverdueFee> overdueFees) {
-//        this.overdueFees = overdueFees;
-//    }
-
 
     public List<Rental> getRentals() {
         return rentals;
