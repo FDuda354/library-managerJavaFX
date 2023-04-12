@@ -1,11 +1,11 @@
 package pl.dudios.librarymanager.login.user.service;
 
-import org.hibernate.Hibernate;
 import org.mindrot.jbcrypt.BCrypt;
 import pl.dudios.librarymanager.login.user.model.AppUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
@@ -25,10 +25,10 @@ public class UserService {
         em.getTransaction().begin();
 
         List<AppUser> allUsers = em.createQuery("SELECT u FROM AppUser u", AppUser.class).getResultList();
-        allUsers.forEach(e -> {
-            Hibernate.initialize(e.getRentals());
+        //allUsers.forEach(e -> {
+        //Hibernate.initialize(e.getRentals());
 
-        });
+        //});
 
         em.getTransaction().commit();
         em.close();
@@ -91,22 +91,30 @@ public class UserService {
 
                 try {
                     AppUser singleResult = em.createQuery("SELECT u FROM AppUser u WHERE u.loginId = :loginId", AppUser.class)
+                            .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                             .setParameter("loginId", user.getLoginId())
                             .getSingleResult();
 
                     if (Objects.equals(singleResult.getId(), user.getId()))
                         throw new NoResultException();
 
+                    em.getTransaction().commit();
+                    em.close();
+
                     errorAlert("Użytkownik o podanym loginie: " + user.getLoginId() + " już istnieje");
                     return false;
 
                 } catch (NoResultException e) {
+                    em.getTransaction().commit();
+                    em.close();
                     if (!validatePesel(user.getPesel())) {
                         errorAlert("Niepoprawny numer PESEL");
                         return false;
                     }
                     return true;
                 } catch (Exception e) {
+                    em.getTransaction().commit();
+                    em.close();
                     errorAlert("Coś poszło nie tak!");
                     return false;
                 }
@@ -119,7 +127,6 @@ public class UserService {
             return false;
         }
     }
-
 
     private boolean validatePesel(String pesel) {
         if (pesel == null || pesel.length() != 11) {

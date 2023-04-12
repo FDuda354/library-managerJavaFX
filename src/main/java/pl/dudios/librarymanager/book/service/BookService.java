@@ -8,10 +8,12 @@ import pl.dudios.librarymanager.login.user.model.AppUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -25,15 +27,13 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
 
-        List<Book> books = em.createQuery("SELECT b FROM Book b", Book.class).getResultList();
+        List<Book> books = em.createQuery("SELECT b FROM Book b ORDER BY b.id", Book.class).getResultList();
 
-        em.getTransaction().commit();
         em.close();
-
         return books;
     }
+
 
     public boolean saveBook(Book book) {
         EntityManager em = entityManagerFactory.createEntityManager();
@@ -71,13 +71,26 @@ public class BookService {
         if (!validateBook(book))
             return;
 
-        em.merge(book);
+        Book bookToUpdate = em.find(Book.class, book.getId(), LockModeType.PESSIMISTIC_WRITE); // zastosowanie pesymistycznej blokady
+
+        if (bookToUpdate == null) {
+            em.getTransaction().rollback();
+            errorAlert("Zmiana danych książki jest niemożliwa - zasób zablokowany przez innego użytkownika");
+            return;
+        }
+
+        bookToUpdate.setTitle(book.getTitle());
+        bookToUpdate.setAuthor(book.getAuthor());
+        bookToUpdate.setQuantity(book.getQuantity());
+        bookToUpdate.setType(book.getType());
+        bookToUpdate.setPublicationDate(book.getPublicationDate());
 
         em.getTransaction().commit();
         em.close();
 
         successAlert("Książka została zaktualizowana");
     }
+
 
     public boolean borrowBook(Long bookId, Integer quantity, LocalDate dueDate) {
 
@@ -91,7 +104,15 @@ public class BookService {
 
         AppUser user = em.find(AppUser.class, LoginService.getUserLogged().getId());
 
-        Book book = em.find(Book.class, bookId);
+        Book book = em.find(Book.class, bookId, LockModeType.PESSIMISTIC_WRITE);
+
+
+        if (book == null) {
+            em.getTransaction().rollback(); // wycofanie transakcji w przypadku pesymistycznego blokowania zasobu przez innego użytkownika
+            errorAlert("Wypożyczenie książki jest niemożliwe - zasób zablokowany przez innego użytkownika");
+            return false;
+        }
+
         if (book.getQuantity() < quantity) {
             errorAlert("Nie ma tyle książek w bibliotece");
             em.getTransaction().commit();
@@ -110,18 +131,17 @@ public class BookService {
         rental.setRentalDate(LocalDate.now());
         em.persist(rental);
 
-
         List<Rental> rentals = Optional.ofNullable(user.getRentals()).orElse(new ArrayList<>());
         rentals.add(rental);
         user.setRentals(rentals);
 
         em.merge(user);
 
-
         em.getTransaction().commit();
         em.close();
         return true;
     }
+
 
     public void returnBook(Long id) {
         EntityManager em = entityManagerFactory.createEntityManager();
@@ -157,7 +177,14 @@ public class BookService {
         List<UserBookFX> userBookFXList = user.getRentals().stream()
                 .filter(rental -> rental.getReturnDate() == null)
                 .map(rental -> new UserBookFX(rental.getBook(), rental))
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(UserBookFX::getDueDate)).sorted((o1, o2) -> {
+                    if (o1.getDueDate().isBefore(o2.getDueDate()))
+                        return -1;
+                    else if (o1.getDueDate().isAfter(o2.getDueDate()))
+                        return 1;
+                    else
+                        return 0;
+                }).collect(Collectors.toList());
 
         em.getTransaction().commit();
         em.close();
@@ -174,7 +201,14 @@ public class BookService {
         List<UserBookFX> userBookFXList = user.getRentals().stream()
                 .filter(rental -> rental.getReturnDate() != null)
                 .map(rental -> new UserBookFX(rental.getBook(), rental))
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(UserBookFX::getReturnDate).reversed()).sorted((o1, o2) -> {
+                    if (o1.getReturnDate().isBefore(o2.getReturnDate()))
+                        return -1;
+                    else if (o1.getReturnDate().isAfter(o2.getReturnDate()))
+                        return 1;
+                    else
+                        return 0;
+                }).collect(Collectors.toList());
 
         em.getTransaction().commit();
         em.close();

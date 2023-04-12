@@ -1,5 +1,9 @@
 package pl.dudios.librarymanager.book.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +15,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "books")
+@Cacheable
+@Cache(region = "book", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book {
 
     @Id

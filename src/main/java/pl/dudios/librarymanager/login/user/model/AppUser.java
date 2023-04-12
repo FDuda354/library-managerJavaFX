@@ -1,7 +1,10 @@
 package pl.dudios.librarymanager.login.user.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import pl.dudios.librarymanager.book.rentals.model.Rental;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +19,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Cacheable
+@Cache(region = "user", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class AppUser {
 
     @Id

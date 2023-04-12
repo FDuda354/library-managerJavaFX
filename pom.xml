@@ -19,11 +19,13 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>18.0.2</version>
+            <classifier>mac</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>18.0.2</version>
+            <classifier>mac</classifier>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
@@ -84,7 +86,18 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
+<!--        <cashe> -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <version>5.4.18.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <!--        <cashe> -->
     </dependencies>
 
     <build>
@@ -104,7 +117,6 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>pl.dudios.librarymanager.HelloApplication</mainClass>
@@ -124,6 +136,7 @@
                                 <module>org.hibernate:hibernate-core</module>
                                 <module>org.postgresql:postgresql</module>
                                 <module>org.projectlombok:lombok</module>
+                                <module>org.mindrot:jbcrypt</module>
                             </modules>
                         </configuration>
                     </execution>
@@ -133,4 +146,3 @@
         </plugins>
     </build>
 </project>
-<!--komenda pakująca do dmg bedzie taka:-->

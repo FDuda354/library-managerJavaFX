@@ -19,7 +19,7 @@
                     <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="245.0" text="Autor"/>
                     <TableColumn fx:id="quantityColumn" prefWidth="84.0" text="Ilość"/>
                     <TableColumn fx:id="dueDateColumn" prefWidth="242.0" text="Wymagany zwrot do"/>
-                    <TableColumn fx:id="daysOverdueColumn" minWidth="0.0" prefWidth="168.0" text="Dni spznienia"/>
+                    <TableColumn fx:id="daysOverdueColumn" minWidth="0.0" prefWidth="168.0" text="Dni spóźnienia"/>
                     <TableColumn fx:id="returnColumn" minWidth="0.0" prefWidth="122.0" text="Akcje"/>
                 </columns>
             </TableView>
