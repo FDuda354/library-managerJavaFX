@@ -40,7 +40,7 @@ public class LoginController {
 
     public void login(ActionEvent actionEvent) throws IOException {
 
-        AppUser user = loginService.validateLogin(usernameField.getText(), passwordField.getText());
+        AppUser user = loginService.validateLogin(usernameField.getText().trim(), passwordField.getText());
 
         if (user == null) {
             loginErrorLabel.setText("Niepoprawny login lub hasło!");

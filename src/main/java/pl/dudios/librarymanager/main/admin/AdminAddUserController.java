@@ -33,23 +33,14 @@ public class AdminAddUserController {
 
     @FXML
     public void addUser() {
-        String login = loginIdField.getText();
-        String name = nameField.getText();
-        String surname = surnameField.getText();
-        Role role = Optional.ofNullable(roleBox.getValue()).map(String::valueOf).map(Role::valueOf).orElse(null);
-        System.out.println(role);
-        String password = BCrypt.hashpw(passwordField.getText(), BCrypt.gensalt());
-        String pesel = peselField.getText();
-        LocalDate birthDate = birthDateField.getValue();
-
         AppUser user = new AppUser();
-        user.setLoginId(login);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setRole(role);
-        user.setPassword(password);
-        user.setPesel(pesel);
-        user.setBirthDate(birthDate);
+        user.setLoginId(loginIdField.getText().trim());
+        user.setName(nameField.getText().trim());
+        user.setSurname(surnameField.getText().trim());
+        user.setRole(Optional.ofNullable(roleBox.getValue()).map(String::valueOf).map(Role::valueOf).orElse(null));
+        user.setPassword(BCrypt.hashpw(passwordField.getText().trim(), BCrypt.gensalt()));
+        user.setPesel(peselField.getText().trim());
+        user.setBirthDate(birthDateField.getValue());
 
         if (userService.saveUser(user))
             clearFields();

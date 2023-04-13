@@ -46,12 +46,12 @@ public class AdminUpdateUserController {
 
         AppUser user = new AppUser();
         user.setId(userId);
-        user.setLoginId(loginIdField.getText());
-        user.setName(nameField.getText());
-        user.setSurname(surnameField.getText());
+        user.setLoginId(loginIdField.getText().trim());
+        user.setName(nameField.getText().trim());
+        user.setSurname(surnameField.getText().trim());
         user.setRole(Role.valueOf(roleBox.getValue()));
-        user.setPassword(passwordField.getText());
-        user.setPesel(peselField.getText());
+        user.setPassword(passwordField.getText().trim());
+        user.setPesel(peselField.getText().trim());
         user.setBirthDate(birthDateField.getValue());
 
         userService.updateUser(user);

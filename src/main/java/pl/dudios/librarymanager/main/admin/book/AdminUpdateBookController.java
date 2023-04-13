@@ -41,22 +41,15 @@ public class AdminUpdateBookController {
 
     @FXML
     public void updateBook() {
-        String title = titleField.getText();
-        String author = authorField.getText();
-        BookType type = getType(typeBox.getValue());
-        LocalDate publicationDate = publicationDateField.getValue();
-        Integer quantity = Integer.valueOf(String.valueOf(quantitySpinner.getValue()));
-
         Book book = new Book();
         book.setId(bookId);
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setType(type);
-        book.setPublicationDate(publicationDate);
-        book.setQuantity(quantity);
+        book.setTitle(titleField.getText().trim());
+        book.setAuthor(authorField.getText().trim());
+        book.setType(getType(typeBox.getValue()));
+        book.setPublicationDate(publicationDateField.getValue());
+        book.setQuantity(Integer.valueOf(String.valueOf(quantitySpinner.getValue())));
 
         bookService.updateBook(book);
-
     }
 
 
